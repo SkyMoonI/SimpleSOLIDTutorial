@@ -6,88 +6,83 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public Animator playerAnimator;
-    public SpriteRenderer playerRenderer;
+	public Animator playerAnimator;
+	public SpriteRenderer playerRenderer;
 
-    public Transform raycastPoint;
-    
-    public float movementSpeed;
+	public Transform raycastPoint;
 
-    public GameObject ui_window;
+	PlayerMovement playerMovement;
 
-    private Rigidbody2D rb2d;
-    private Vector2 movementVector;
+	public GameObject ui_window;
 
-    private void Awake()
-    {
-        rb2d = GetComponent<Rigidbody2D>();
-    }
+	private Vector2 movementVector;
 
-    private void Start()
-    {
-        SceneManager.LoadScene("PremadeLevel", LoadSceneMode.Additive);
-    }
-    private void Update()
-    {
-        movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        movementVector.Normalize();
-        if (Input.GetAxisRaw("Fire1") > 0)
-        {
-            Interact();
-        }
-    }
 
-    private void FixedUpdate()
-    {
-        MovePlayer(movementVector);
-        if (movementVector.magnitude > 0)
-        {
-            ui_window.SetActive(false);
-        }
-        else
-        {
-            playerAnimator.SetBool("Walk", false);
-        }
-    }
+	private void Start()
+	{
+		SceneManager.LoadScene("PremadeLevel", LoadSceneMode.Additive);
+		playerMovement = GetComponent<PlayerMovement>();
+	}
+	private void Update()
+	{
+		movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		movementVector.Normalize();
+		if (Input.GetAxisRaw("Fire1") > 0)
+		{
+			Interact();
+		}
+	}
 
-    private void Interact()
-    {
-        Debug.DrawRay(raycastPoint.position, playerRenderer.flipX ? Vector3.left : Vector3.right, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, playerRenderer.flipX ? Vector3.left : Vector3.right,1);
-        if(hit.collider != null)
-        {
-            if (hit.collider.GetComponent<NPC_Enemy>())
-            {
-                hit.collider.GetComponent<NPC_Enemy>().GetHit();
-            }
-            else if (hit.collider.GetComponent<NPC_Friendly>())
-            {
-                hit.collider.GetComponent<NPC_Friendly>().Talk();
-            }
-        }
+	private void FixedUpdate()
+	{
+		MovePlayer(movementVector);
+		if (movementVector.magnitude > 0)
+		{
+			ui_window.SetActive(false);
+		}
+		else
+		{
+			playerAnimator.SetBool("Walk", false);
+		}
+	}
 
-    }
+	private void Interact()
+	{
+		Debug.DrawRay(raycastPoint.position, playerRenderer.flipX ? Vector3.left : Vector3.right, Color.red);
+		RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, playerRenderer.flipX ? Vector3.left : Vector3.right, 1);
+		if (hit.collider != null)
+		{
+			if (hit.collider.GetComponent<NPC_Enemy>())
+			{
+				hit.collider.GetComponent<NPC_Enemy>().GetHit();
+			}
+			else if (hit.collider.GetComponent<NPC_Friendly>())
+			{
+				hit.collider.GetComponent<NPC_Friendly>().Talk();
+			}
+		}
 
-    private void MovePlayer(Vector2 movementVector)
-    {
-        playerAnimator.SetBool("Walk", true);
-        //rb2d.MovePosition(rb2d.position + movementVector * movementSpeed * Time.fixedDeltaTime);
-        rb2d.velocity = movementVector * movementSpeed;
+	}
 
-        if (Mathf.Abs(movementVector.x) > 0.1f)
-            playerRenderer.flipX = Vector3.Dot(transform.right, movementVector) < 0;
-    }
+	private void MovePlayer(Vector2 movementVector)
+	{
+		playerAnimator.SetBool("Walk", true);
+		//rb2d.MovePosition(rb2d.position + movementVector * movementSpeed * Time.fixedDeltaTime);
+		playerMovement.PlayerMove(movementVector);
+		if (Mathf.Abs(movementVector.x) > 0.1f)
+			playerRenderer.flipX = Vector3.Dot(transform.right, movementVector) < 0;
+	}
 
-    public void ReceiveDamaged()
-    {
-        StopAllCoroutines();
-        StartCoroutine(FlashRed());
-    }
+	public void ReceiveDamaged()
+	{
+		StopAllCoroutines();
+		StartCoroutine(FlashRed());
+	}
 
-    private IEnumerator FlashRed()
-    {
-        playerRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        playerRenderer.color = Color.white;
-    }
+	private IEnumerator FlashRed()
+	{
+		playerRenderer.color = Color.red;
+		yield return new WaitForSeconds(0.1f);
+		playerRenderer.color = Color.white;
+	}
 }
