@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class NPC_Friendly : MonoBehaviour
 {
-    public GameObject ui_window;
-    public AudioSource audioSource;
-    public Text textField;
-    public string text = "Hi there. Look out for that KOBOLD on the other side!";
+	UIController uIController;
 
-    public void Talk()
-    {
-        ui_window.SetActive(true);
-        textField.text = text;
-        audioSource.Play();
-        
-    }
+	public AudioSource audioSource;
+
+
+	void Start()
+	{
+		uIController = GetComponent<UIController>();
+	}
+	public void Talk()
+	{
+		uIController.TalkFriendly();
+		audioSource.Play();
+	}
 }

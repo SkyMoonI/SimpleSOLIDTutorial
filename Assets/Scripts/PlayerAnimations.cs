@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public Animator playerAnimator;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void SetupAnimations(Vector2 movementVector)
+	{
+		if (movementVector.magnitude > 0f)
+			playerAnimator.SetBool("Walk", true);
+		else
+			playerAnimator.SetBool("Walk", false);
+	}
 }

@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 673353960}
   - component: {fileID: 673353964}
   - component: {fileID: 673353965}
+  - component: {fileID: 673353966}
   m_Layer: 0
   m_Name: EnemyNPC
   m_TagString: Untagged
@@ -599,10 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8018209984eef8f4fbea62463c39488c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui_window: {fileID: 614753882}
   audioSource: {fileID: 673353965}
-  textField: {fileID: 844677124}
-  text: "I deal 10 physical damage    ( \u2022\u0300\u1D17\u2022\u0301 )\u0648 \u0311\u0311 "
 --- !u!82 &673353965
 AudioSource:
   m_ObjectHideFlags: 0
@@ -699,6 +697,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &673353966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673353959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742e8b626273e10428ae0f880068c649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui_window: {fileID: 614753882}
+  textField: {fileID: 844677124}
+  enemyText: "I deal 10 physical damage    ( \u2022\u0300\u1D17\u2022\u0301 )\u0648
+    \u0311\u0311 "
+  friendlyText: Hi there. Look out for that KOBOLD on the other side!
 --- !u!1 &749550362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +1056,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2c8fa133a33eb42a83972bb1e030f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnimator: {fileID: 815885425}
   ui_window: {fileID: 614753882}
 --- !u!82 &837455034
 AudioSource:
@@ -1189,6 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968d3c164c606554195dc59a2a0f632e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 815885425}
 --- !u!114 &837455039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1663,6 +1678,7 @@ GameObject:
   - component: {fileID: 1998702838}
   - component: {fileID: 1998702842}
   - component: {fileID: 1998702843}
+  - component: {fileID: 1998702844}
   m_Layer: 0
   m_Name: FriendlyNPC
   m_TagString: Untagged
@@ -1830,10 +1846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdfc58194c026447af37c64c00132a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui_window: {fileID: 614753882}
   audioSource: {fileID: 1998702843}
-  textField: {fileID: 844677124}
-  text: Hi there. Look out for that KOBOLD on the other side!
 --- !u!82 &1998702843
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1930,6 +1943,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1998702844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998702837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742e8b626273e10428ae0f880068c649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui_window: {fileID: 614753882}
+  textField: {fileID: 844677124}
+  enemyText: "I deal 10 physical damage    ( \u2022\u0300\u1D17\u2022\u0301 )\u0648
+    \u0311\u0311 "
+  friendlyText: Hi there. Look out for that KOBOLD on the other side!
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
